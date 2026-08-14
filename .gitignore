@@ -1,0 +1,10 @@
+# Local execution state folders
+.terraform/
+
+# Terraform state files (holds sensitive metadata)
+*.tfstate
+*.tfstate.backup
+
+# Variable override files that might contain local passwords/keys
+*.tfvars
+*.tfvars.json
