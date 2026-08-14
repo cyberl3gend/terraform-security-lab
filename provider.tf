@@ -3,7 +3,7 @@ terraform {
 
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "~> 5.0"
     }
   }
@@ -15,8 +15,8 @@ provider "aws" {
   default_tags {
     tags = {
       Environment = "Dev"
-      Managedby = "Terraform"
-      Project = "Security-IaC-Lab"
+      Managedby   = "Terraform"
+      Project     = "Security-IaC-Lab"
     }
   }
 }

@@ -12,6 +12,6 @@ module "secure_storage" {
 module "secure_networking" {
   source = "./modules/networking"
 
-  vpc_id = data.aws_vpc.default.id
+  vpc_id      = data.aws_vpc.default.id
   environment = "dev"
 }

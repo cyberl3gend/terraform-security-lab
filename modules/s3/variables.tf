@@ -1,10 +1,10 @@
 variable "bucket_name" {
-  type = string
+  type        = string
   description = "The unique name of the s3 bucket to create"
 }
 
 variable "environment" {
-  type = string
+  type        = string
   description = "The target deployment environment"
-  default = "dev"
+  default     = "dev"
 }

@@ -1,16 +1,16 @@
 variable "vpc_id" {
-  type = string
-  description = "The ID of the VPC where the security group will be created" 
+  type        = string
+  description = "The ID of the VPC where the security group will be created"
 }
 
 variable "environment" {
-  type = string
+  type        = string
   description = "The target environment"
-  default = "dev"
+  default     = "dev"
 }
 
 variable "allowed_ingress_ports" {
-  type = list(number)
+  type        = list(number)
   description = "List of allowed inbound ports"
-  default = [443]
+  default     = [443]
 }
