@@ -36,4 +36,10 @@ jobs:
           output_format: cli
           soft_fail: false
 
-          
+      - name: Run Checkov Security Scn
+        uses: bridgecrewio/checkov-action@master
+        with:
+          framework: terraform
+          output_format: cli
+          soft_fail: false
+          config_file: .checkov.yaml          
