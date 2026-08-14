@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
- 
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
@@ -35,11 +35,4 @@ jobs:
           framework: terraform
           output_format: cli
           soft_fail: false
-
-      - name: Run Checkov Security Scn
-        uses: bridgecrewio/checkov-action@master
-        with:
-          framework: terraform
-          output_format: cli
-          soft_fail: false
-          config_file: .checkov.yaml          
+          config_file: .checkov.yaml
