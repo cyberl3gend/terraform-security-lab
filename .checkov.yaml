@@ -5,3 +5,13 @@ skip-check:
   - CKV2_AWS_5   
   - CKV2_AWS_61  
   - CKV2_AWS_62  
+  
+directory:
+  - environments/dev
+  - environments/prod
+external-checks-dir:
+  - policies/checkov
+framework:
+  - terraform
+compact: true
+soft-fail: false

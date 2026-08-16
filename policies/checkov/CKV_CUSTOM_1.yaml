@@ -1,0 +1,20 @@
+metadata:
+  id: "CKV_CUSTOM_1"
+  name: "Ensure SSH (22) is not publicly accessible from 0.0.0.0/0"
+  category: "NETWORKING"
+definition:
+  not:
+    and:
+      - cond_type: "attribute"
+        resource_types:
+          - "aws_security_group_rule"
+        attribute: "from_port"
+        operator: "equals"
+        value: 22
+      - cond_type: "attribute"
+        resource_types:
+          - "aws_security_group_rule"
+        attribute: "cidr_blocks"
+        operator: "contains"
+        value: "0.0.0.0/0"
+
