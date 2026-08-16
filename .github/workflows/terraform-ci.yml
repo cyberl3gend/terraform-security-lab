@@ -10,9 +10,6 @@ jobs:
   terraform-ci:
     name: "Automated Security & Validation Gate"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./terraform
 
     permissions:
       contents: read
@@ -28,7 +25,7 @@ jobs:
           terraform_version: "1.8.0"
 
       - name: Terraform Format Check
-        run: terraform fmt -check
+        run: terraform fmt -check -recursive
 
       - name: Terraform Init
         run: terraform init -backend=false
@@ -36,18 +33,17 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Run Checkov Policy-as-Code Scan
+      - name: Run Checkov Security Scan
         uses: bridgecrewio/checkov-action@master
         with:
           framework: terraform
           output_format: cli,sarif
           output_file_path: console,results.sarif
           soft_fail: false
-          config_file: ../.checkov.yaml
-          directory: .
+          config_file: .checkov.yaml
 
       - name: Upload SARIF Results to GitHub Security
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
-          sarif_file: terraform/results.sarif
+          sarif_file: results.sarif
