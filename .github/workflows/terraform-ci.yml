@@ -1,4 +1,4 @@
-name: "Terraform Security & Quality CI"
+name: DevSecOps IaC Security Gate
 
 on:
   push:
@@ -10,6 +10,13 @@ jobs:
   terraform-ci:
     name: "Automated Security & Validation Gate"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
+
+    permissions:
+      contents: read
+      security-events: write
 
     steps:
       - name: Checkout Repository
@@ -29,10 +36,18 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Run Checkov Security Scan
+      - name: Run Checkov Policy-as-Code Scan
         uses: bridgecrewio/checkov-action@master
         with:
           framework: terraform
-          output_format: cli
+          output_format: cli,sarif
+          output_file_path: console,results.sarif
           soft_fail: false
-          config_file: .checkov.yaml
+          config_file: ../.checkov.yaml
+          directory: .
+
+      - name: Upload SARIF Results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: terraform/results.sarif
